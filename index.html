@@ -16,7 +16,8 @@
     --radio:50px;        /* radio unificado para todas las superficies e imágenes */
   }
   *{margin:0;padding:0;box-sizing:border-box;}
-  body{background:#e9e9e9;font-family:'Archivo',sans-serif;overflow-x:hidden;}
+  html{overflow-x:hidden;}
+body{background:#e9e9e9;font-family:'Archivo',sans-serif;overflow-x:hidden;width:100%;max-width:100vw;}
 
   /* ---- Lienzo: replica exacta del frame de Figma (1440px) ---- */
   .frame{
@@ -486,17 +487,20 @@ tus fotos.</p>
   let curScale = 1;
 
   function applyResponsive() {
-    curScale = window.innerWidth / DESIGN_W;
-    frameEl.style.transform = `scale(${curScale})`;
-    document.body.style.height = Math.ceil(DESIGN_H * curScale) + 'px';
-    const navW = 1350;
-    const scaledNavW = navW * curScale;
-    navbar.style.left = Math.round((window.innerWidth - scaledNavW) / 2) + 'px';
-    navbar.style.top = Math.round(20 * curScale) + 'px';
-    navbar.style.width = navW + 'px';
-    navbar.style.transform = `scale(${curScale})`;
-    navbar.style.transformOrigin = 'top left';
-  }
+  curScale = window.innerWidth / DESIGN_W;
+  frameEl.style.transform = `scale(${curScale})`;
+  frameEl.style.transformOrigin = 'top left';
+  frameEl.style.marginBottom = `-${DESIGN_H - DESIGN_H * curScale}px`;
+  document.body.style.height = Math.ceil(DESIGN_H * curScale) + 'px';
+  document.body.style.overflowX = 'hidden';
+  document.body.style.width = '100vw';
+  const navW = 1350;
+  navbar.style.left = Math.round((window.innerWidth - navW * curScale) / 2) + 'px';
+  navbar.style.top = Math.round(20 * curScale) + 'px';
+  navbar.style.width = navW + 'px';
+  navbar.style.transform = `scale(${curScale})`;
+  navbar.style.transformOrigin = 'top left';
+}
 
   applyResponsive();
   window.addEventListener('resize', applyResponsive);
