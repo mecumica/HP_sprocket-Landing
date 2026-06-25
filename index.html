@@ -16,16 +16,17 @@
     --radio:50px;        /* radio unificado para todas las superficies e imágenes */
   }
   *{margin:0;padding:0;box-sizing:border-box;}
-  body{background:#e9e9e9;font-family:'Archivo',sans-serif;}
+  body{background:#e9e9e9;font-family:'Archivo',sans-serif;overflow-x:hidden;}
 
   /* ---- Lienzo: replica exacta del frame de Figma (1440px) ---- */
   .frame{
     position:relative;
     width:1440px;
     height:4460px;
-    margin:0 auto;
+    margin:0;
     background:#fff;
     overflow:hidden;
+    transform-origin:top left;
     box-shadow:0 49px 107px rgba(0,0,0,0.10), 0 195px 195px rgba(0,0,0,0.09);
   }
 
@@ -228,24 +229,23 @@
 </style>
 </head>
 <body>
-<div class="frame">
+<nav class="navbar">
+  <a href="https://www.hp.com" target="_blank" rel="noopener noreferrer"><img class="navbar__logo" src="https://www.figma.com/api/mcp/asset/9c18f21b-c234-4a8f-8b2b-a6625a8413a9" alt="HP"></a>
+  <div class="navbar__links">
+    <a class="navbar__link" href="#por-que">HP Sprocket</a>
+    <a class="navbar__link" href="#magia">Cómo funciona</a>
+    <a class="navbar__link" href="#ideas">Ideas</a>
+  </div>
+  <div class="navbar__pill">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="6" cy="6" r="4.5" stroke="#000" stroke-width="1.5"/>
+      <line x1="9.5" y1="9.5" x2="13" y2="13" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <input type="text" placeholder="Buscar…">
+  </div>
+</nav>
 
-  <!-- ===================== NAVBAR ===================== -->
-  <nav class="navbar">
-    <a href="https://www.hp.com" target="_blank" rel="noopener noreferrer"><img class="navbar__logo" src="https://www.figma.com/api/mcp/asset/9c18f21b-c234-4a8f-8b2b-a6625a8413a9" alt="HP"></a>
-    <div class="navbar__links">
-      <a class="navbar__link" href="#por-que">HP Sprocket</a>
-      <a class="navbar__link" href="#magia">Cómo funciona</a>
-      <a class="navbar__link" href="#ideas">Ideas</a>
-    </div>
-    <div class="navbar__pill">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="6" cy="6" r="4.5" stroke="#000" stroke-width="1.5"/>
-        <line x1="9.5" y1="9.5" x2="13" y2="13" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
-      <input type="text" placeholder="Buscar…">
-    </div>
-  </nav>
+<div class="frame">
 
   <!-- ===================== HERO ===================== -->
   <section class="hero">
@@ -476,10 +476,32 @@ tus fotos.</p>
 
 </div>
 <script>
-  /* ---- NAV SCROLL ---- */
+  /* ---- RESPONSIVE SCALING ---- */
+  const DESIGN_W = 1440;
+  const DESIGN_H = 4460;
+  const frameEl = document.querySelector('.frame');
   const navbar = document.querySelector('.navbar');
+  let curScale = 1;
+
+  function applyResponsive() {
+    curScale = window.innerWidth / DESIGN_W;
+    frameEl.style.transform = `scale(${curScale})`;
+    document.body.style.height = Math.ceil(DESIGN_H * curScale) + 'px';
+    const navW = 1350;
+    const scaledNavW = navW * curScale;
+    navbar.style.left = Math.round((window.innerWidth - scaledNavW) / 2) + 'px';
+    navbar.style.top = Math.round(20 * curScale) + 'px';
+    navbar.style.width = navW + 'px';
+    navbar.style.transform = `scale(${curScale})`;
+    navbar.style.transformOrigin = 'top left';
+  }
+
+  applyResponsive();
+  window.addEventListener('resize', applyResponsive);
+
+  /* ---- NAV SCROLL ---- */
   window.addEventListener('scroll', function () {
-    navbar.classList.toggle('navbar--scrolled', window.scrollY > 80);
+    navbar.classList.toggle('navbar--scrolled', window.scrollY > Math.round(80 * curScale));
   });
 
   /* ---- PASOS INTERACTIVOS ---- */
