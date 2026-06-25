@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HP Sprocket — Landing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&family=Archivo+Black&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --amarillo:#f2ee68;
+    --crema:#f6f2e7;
+    --verde:#29654b;
+    --lavanda:#c4caee;
+    --radio:50px;        /* radio unificado para todas las superficies e imágenes */
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:#e9e9e9;font-family:'Archivo',sans-serif;}
+
+  /* ---- Lienzo: replica exacta del frame de Figma (1440px) ---- */
+  .frame{
+    position:relative;
+    width:1440px;
+    height:4460px;
+    margin:0 auto;
+    background:#fff;
+    overflow:hidden;
+    box-shadow:0 49px 107px rgba(0,0,0,0.10), 0 195px 195px rgba(0,0,0,0.09);
+  }
+
+  .archivo{font-family:'Archivo',sans-serif;}
+  .archivo-black{font-family:'Archivo Black',sans-serif;font-weight:400;}
+  .inter{font-family:'Inter',sans-serif;}
+  .abs{position:absolute;}
+  p{word-break:break-word;}
+
+  /* ===================== HERO ===================== */
+  .hero{position:absolute;left:0;top:0;width:1440px;height:835px;}
+  .hero__img{position:absolute;left:50%;transform:translateX(-50%);top:14px;width:1412px;height:739px;border-radius:var(--radio);object-fit:cover;pointer-events:none;}
+  .hero__texto{position:absolute;left:783px;top:326px;width:456px;height:286px;}
+  .hero__h1{position:absolute;left:0;top:0;font-family:'Archivo Black',sans-serif;font-weight:400;font-size:49.702px;line-height:49.702px;letter-spacing:-1.9881px;color:#fff;white-space:pre;}
+  .hero__sub{position:absolute;left:0;top:169.98px;width:475.155px;font-family:'Inter',sans-serif;font-weight:400;font-size:19.881px;line-height:23.857px;letter-spacing:0.994px;color:#fff;}
+  .hero__btn{position:absolute;left:0;top:238.57px;width:179.923px;height:47.714px;background:var(--amarillo);border-radius:42.212px;display:flex;align-items:center;justify-content:center;text-decoration:none;cursor:pointer;}
+  .hero__btn p{position:static;}
+  .hero__btn p{position:absolute;left:20.87px;top:13.92px;font-family:'Inter',sans-serif;font-weight:600;font-size:21.106px;line-height:1;color:#000;white-space:nowrap;}
+
+  /* ===================== SECCIÓN ¿POR QUÉ? ===================== */
+  .why{position:absolute;left:200px;top:867px;width:1037px;height:811px;}
+
+  /* navbar */
+  .navbar{position:fixed;top:20px;left:50%;transform:translateX(-50%);width:1350px;height:64px;display:flex;align-items:center;justify-content:space-between;z-index:1000;padding:0 44px;transition:background 0.35s ease,backdrop-filter 0.35s ease,border-radius 0.35s ease,box-shadow 0.35s ease;}
+  .navbar--scrolled{background:rgba(41,101,75,0.40);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:50px;box-shadow:0 4px 24px rgba(0,0,0,0.10);}
+  .navbar__logo{width:40px;height:40px;border-radius:50%;object-fit:cover;display:block;}
+  .navbar__links{display:flex;gap:10px;align-items:center;}
+  .navbar__link{font-family:'Archivo',sans-serif;font-weight:500;font-size:20px;line-height:1;color:#fff;white-space:nowrap;text-decoration:none;cursor:pointer;background:rgba(255,255,255,0.20);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:20px;padding:8px 16px;}
+  .navbar__link:hover{background:rgba(255,255,255,0.32);}
+  .navbar__pill{width:155px;height:36px;background:var(--amarillo);border-radius:20px;display:flex;align-items:center;padding:0 10px;gap:6px;}
+  .navbar__pill svg{flex-shrink:0;opacity:0.6;}
+  .navbar__pill input{border:none;background:transparent;font-family:'Archivo',sans-serif;font-size:13px;font-weight:500;outline:none;width:100%;color:#000;}
+  .navbar__pill input::placeholder{color:rgba(0,0,0,0.5);}
+
+  .why__h2{position:absolute;left:518.5px;transform:translateX(-50%);top:13px;font-family:'Archivo Black',sans-serif;font-weight:400;font-size:65px;line-height:65px;letter-spacing:-2.6px;color:#000;text-align:center;white-space:nowrap;}
+  .why__sub{position:absolute;left:518.5px;transform:translateX(-50%);top:100px;font-family:'Archivo',sans-serif;font-weight:400;font-size:24px;line-height:1;color:#000;text-align:center;white-space:nowrap;}
+
+  .cards{position:absolute;left:0;top:199px;width:1037px;height:612px;}
+  .card-item{position:absolute;width:333px;height:570px;background:var(--crema);border-radius:var(--radio);cursor:pointer;overflow:hidden;transition:background 0.3s ease;}
+  .card-item.activa{background:var(--amarillo);}
+  .card-photo{position:absolute;top:263px;left:0;width:333px;height:307px;border-radius:var(--radio);object-fit:cover;}
+  .card-title{position:absolute;top:84px;left:37px;font-family:'Archivo Black',sans-serif;font-weight:400;font-size:32.229px;line-height:1;color:#000;white-space:pre;}
+  .card-body{position:absolute;top:174px;left:37px;font-family:'Inter',sans-serif;font-weight:400;font-size:16px;line-height:1;color:#000;}
+  .card-icon{position:absolute;top:9.2px;left:263px;width:58.103px;height:58.103px;display:flex;align-items:center;justify-content:center;}
+  .card-icon > div{transform:rotate(-170.55deg);width:50.5px;height:50.5px;}
+  .card-icon img{width:50.5px;height:50.5px;}
+
+  /* ===================== PRICING LEFT ===================== */
+  .pricing-left{position:absolute;left:200px;top:1766px;width:458px;height:551px;display:flex;flex-direction:column;gap:28px;}
+  .pricing-left__title{font-family:'Archivo Black',sans-serif;font-weight:400;font-size:52px;line-height:52px;letter-spacing:-2.08px;color:#000;}
+  .pricing-left__img{flex:1;background:rgba(196,202,238,0.22);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(196,202,238,0.45);border-radius:var(--radio);overflow:hidden;position:relative;}
+  .carousel{position:absolute;inset:0;overflow:hidden;}
+  .carousel__track{display:flex;width:300%;height:100%;transition:transform 0.45s cubic-bezier(.4,0,.2,1);}
+  .carousel__slide{width:33.333%;height:100%;display:flex;align-items:center;justify-content:center;padding:24px;}
+  .carousel__slide img{width:100%;height:100%;object-fit:contain;display:block;}
+  .carousel__btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.65);backdrop-filter:blur(8px);border:none;border-radius:50%;width:38px;height:38px;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#29654b;transition:background 0.2s;}
+  .carousel__btn:hover{background:rgba(255,255,255,0.9);}
+  .carousel__btn--prev{left:12px;}
+  .carousel__btn--next{right:12px;}
+  .carousel__dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:7px;}
+  .carousel__dot{width:8px;height:8px;border-radius:50%;background:rgba(41,101,75,0.25);cursor:pointer;transition:background 0.25s;}
+  .carousel__dot--active{background:rgba(41,101,75,0.75);}
+
+  /* ===================== CARDS DE PAPEL / PRECIOS ===================== */
+  .pricing{position:absolute;left:718px;top:1766px;width:521px;display:flex;flex-direction:column;gap:20px;}
+  .pricing__card{border-radius:var(--radio);height:170px;color:#000;display:flex;flex-direction:column;gap:8px;line-height:1;padding:36px 40px 28px 40px;}
+  .pricing__card--amarillo{background:var(--amarillo);}
+  .pricing__card--crema{background:var(--crema);}
+  .pricing__eyebrow{font-family:'Archivo',sans-serif;font-weight:400;font-size:16px;}
+  .pricing__title{font-family:'Archivo',sans-serif;font-weight:700;font-size:36px;}
+  .pricing__desc{font-family:'Archivo',sans-serif;font-weight:400;font-size:24px;}
+  .pricing__cta{border-radius:var(--radio);height:171px;background:var(--verde);display:flex;flex-direction:column;justify-content:center;gap:12px;padding:30px 40px;cursor:pointer;}
+  .pricing__cta-title{font-family:'Archivo',sans-serif;font-weight:700;font-size:36px;line-height:1;color:#fff;}
+  .pricing__cta-sub{font-family:'Archivo',sans-serif;font-weight:400;font-size:24px;line-height:1.2;color:rgba(255,255,255,0.75);}
+  /* PRICING INTERACTIONS */
+  .pricing__card--amarillo{cursor:pointer;}
+  @keyframes sticker-stamp{
+    0%{transform:scale(1) rotate(0deg);box-shadow:none;}
+    25%{transform:scale(1.06) rotate(-2.5deg);box-shadow:0 16px 40px rgba(0,0,0,0.20);}
+    55%{transform:scale(0.96) rotate(1deg);box-shadow:0 2px 8px rgba(0,0,0,0.08);}
+    78%{transform:scale(1.02) rotate(-0.4deg);}
+    100%{transform:scale(1) rotate(0deg);box-shadow:none;}
+  }
+  .pricing__card--amarillo.sticker-stamping{animation:sticker-stamp 0.55s cubic-bezier(.36,.07,.19,.97) both;}
+  .pricing__card-wrap{position:relative;height:170px;border-radius:var(--radio);}
+  #card-crema{position:relative;z-index:1;cursor:pointer;height:100%;}
+  .paper-sheet{position:absolute;inset:0;border-radius:var(--radio);pointer-events:none;}
+  @keyframes bounce-right{
+    0%{transform:translateX(0);}
+    28%{transform:translateX(26px);}
+    48%{transform:translateX(-8px);}
+    65%{transform:translateX(14px);}
+    80%{transform:translateX(-4px);}
+    91%{transform:translateX(6px);}
+    100%{transform:translateX(0);}
+  }
+  .pricing__cta.bouncing{animation:bounce-right 0.65s cubic-bezier(.36,.07,.19,.97) both;}
+
+  /* ===================== BANNER EXPERIENCIAS ===================== */
+  .exp-banner{position:absolute;left:13px;top:2529px;width:1412px;height:280px;border-radius:var(--radio);object-fit:cover;pointer-events:none;}
+  .exp-text{position:absolute;left:719px;transform:translateX(-50%);top:2609px;font-family:'Archivo Black',sans-serif;font-weight:400;font-size:58px;line-height:60px;letter-spacing:-2.32px;color:#fff;text-align:center;white-space:pre;text-shadow:0px 4px 4px rgba(0,0,0,0.4);}
+
+  /* ===================== LA MAGIA DEL INSTANTE ===================== */
+  .magia{position:absolute;left:359px;top:2992px;width:719px;display:flex;flex-direction:column;gap:23px;align-items:center;text-align:center;color:#000;}
+  .magia__h{font-family:'Archivo Black',sans-serif;font-weight:400;font-size:65px;line-height:65px;letter-spacing:-2.6px;width:100%;}
+  .magia__sub{font-family:'Archivo',sans-serif;font-weight:500;font-size:24px;line-height:1;width:100%;}
+
+  /* ===================== PASOS ===================== */
+  .pasos{position:absolute;left:200px;top:3184px;display:flex;gap:15px;align-items:flex-start;}
+  .paso{height:370px;border-radius:var(--radio);position:relative;width:249px;overflow:hidden;cursor:pointer;transition:transform 0.2s ease,box-shadow 0.2s ease,opacity 0.3s ease;}
+  .paso--verde{background:var(--verde);color:#fff;}
+  .paso--lavanda{background:var(--lavanda);color:#000;}
+  .paso--amarillo{background:var(--amarillo);color:#000;}
+  .paso:not(.bloqueado):hover{transform:translateY(-5px);box-shadow:0 14px 32px rgba(0,0,0,0.18);}
+  .paso.bloqueado{opacity:0.38;cursor:not-allowed;}
+  .paso__capa{position:absolute;inset:0;transition:opacity 0.35s ease;}
+  .paso__capa--activa{opacity:0;pointer-events:none;padding:20px;display:flex;flex-direction:column;}
+  .paso.activado .paso__capa--inicial{opacity:0;pointer-events:none;}
+  .paso.activado .paso__capa--activa{opacity:1;pointer-events:all;}
+  .paso__num{position:absolute;top:37px;left:20px;font-family:'Archivo',sans-serif;font-weight:500;font-size:96px;line-height:65px;letter-spacing:-3.84px;white-space:nowrap;}
+  .paso__title{position:absolute;top:122px;left:20px;font-family:'Archivo Black',sans-serif;font-weight:400;font-size:32.229px;line-height:1;white-space:nowrap;}
+  .paso__body{position:absolute;top:174px;left:20px;width:209px;font-family:'Inter',sans-serif;font-weight:500;font-size:14px;line-height:20px;letter-spacing:-0.56px;}
+  .paso__hint{position:absolute;bottom:18px;left:20px;font-family:'Inter',sans-serif;font-size:11px;font-weight:600;opacity:0.65;animation:parpadeo 2s infinite;}
+  @keyframes parpadeo{0%,100%{opacity:0.65;}50%{opacity:0.2;}}
+  .pi-num{font-family:'Archivo',sans-serif;font-weight:500;font-size:36px;line-height:1;letter-spacing:-2px;margin-bottom:2px;}
+  .pi-label{font-family:'Archivo Black',sans-serif;font-size:18px;line-height:1;margin-bottom:10px;}
+  .foto-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:6px;height:60px;width:157px;}
+  .foto-thumb{width:100%;height:100%;object-fit:cover;border-radius:14px;cursor:pointer;transition:transform 0.2s,outline 0.15s;outline:3px solid transparent;display:block;}
+  .foto-thumb:hover{transform:scale(1.05);}
+  .foto-thumb.elegida{outline:3px solid #fff;box-shadow:0 0 0 3px rgba(255,255,255,0.35);}
+  .foto-preview{width:100%;height:150px;object-fit:cover;border-radius:14px;display:block;margin-bottom:8px;transition:filter 0.4s ease;}
+  .filtros{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px;}
+  .filtro-btn{background:rgba(0,0,0,0.12);border:none;border-radius:10px;padding:5px 9px;font-size:11px;cursor:pointer;font-family:'Inter',sans-serif;font-weight:600;transition:background 0.2s;color:inherit;}
+  .filtro-btn:hover,.filtro-btn.sel{background:rgba(0,0,0,0.28);}
+  .listo-btn{width:100%;padding:10px;background:var(--verde);color:#fff;border:none;border-radius:14px;font-family:'Archivo',sans-serif;font-weight:700;font-size:13px;cursor:pointer;margin-top:auto;transition:background 0.2s;}
+  .listo-btn:hover{background:#1e4d38;}
+  .bt-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;gap:12px;width:100%;}
+  .bt-icono{animation:btPulse 1.1s ease-in-out infinite;display:flex;}
+  @keyframes btPulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.18);opacity:0.5;}}
+  .bt-status{font-family:'Inter',sans-serif;font-size:13px;font-weight:600;text-align:center;}
+  .bt-bar-wrap{width:100%;height:5px;background:rgba(0,0,0,0.15);border-radius:3px;overflow:hidden;}
+  .bt-bar{height:100%;background:#000;border-radius:3px;width:0%;transition:width 2.2s ease;}
+  .imp-wrap{display:flex;flex-direction:column;align-items:center;gap:8px;flex:1;width:100%;min-height:0;}
+  .imp-slot{width:100%;flex:1;background:rgba(0,0,0,0.15);border-radius:14px;overflow:hidden;position:relative;min-height:0;transition:background 0.6s ease,border-radius 0.6s ease;}
+  .papel{position:absolute;top:0;left:50%;width:82%;transform:translateX(-50%);clip-path:inset(0 0 100% 0);transition:clip-path 2s linear;border-radius:4px;overflow:hidden;background:#fff;}
+  .papel img{width:100%;display:block;object-fit:cover;max-height:130px;}
+  .papel.saliendo{clip-path:inset(0 0 0% 0);}
+  .papel.impresa{box-shadow:0 8px 28px rgba(0,0,0,0.22);border-radius:4px;}
+  .scan-line{position:absolute;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,rgba(100,200,255,0.85),transparent);top:0;opacity:0;z-index:2;transition:top 2s linear,opacity 0.2s;}
+  .scan-line.activo{top:100%;opacity:1;}
+  .imprimir-btn{width:100%;padding:10px;background:var(--amarillo);color:#000;border:none;border-radius:14px;font-family:'Archivo',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:background 0.2s;}
+  .imprimir-btn:hover{background:#e8e450;}
+  .imp-estado{font-family:'Inter',sans-serif;font-size:12px;text-align:center;min-height:18px;font-weight:500;}
+  .paso.impreso{background:#fff!important;border-radius:2px!important;box-shadow:0 4px 16px rgba(0,0,0,0.10),0 1px 4px rgba(0,0,0,0.06)!important;cursor:default;transition:background 0.7s ease,border-radius 0.5s ease,box-shadow 0.6s ease;}
+  .paso.impreso .pi-num,.paso.impreso .pi-label,.paso.impreso .imprimir-btn,.paso.impreso .imp-estado{display:none!important;}
+  .paso.impreso .paso__capa--activa{padding:14px 14px 0 14px;}
+  .paso.impreso .imp-wrap{gap:0;}
+  .paso.impreso .imp-slot{background:transparent!important;border-radius:0;overflow:visible;}
+  .paso.impreso .papel{inset:0;width:100%!important;left:0!important;transform:none!important;clip-path:none!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;}
+  .paso.impreso .papel img{height:100%!important;max-height:none!important;width:100%!important;object-fit:cover;border-radius:0;}
+  .polaroid-firma{height:0;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:#fff;transition:height 0.5s ease 0.3s;flex-shrink:0;}
+  .paso.impreso .polaroid-firma{height:64px;}
+  .firma-logo{font-family:'Archivo',sans-serif;font-weight:700;font-size:18px;color:#1a1a1a;line-height:1;letter-spacing:-0.5px;}
+  .firma-sub{font-family:'Archivo',sans-serif;font-size:9px;font-weight:400;color:#aaa;letter-spacing:3px;text-transform:uppercase;}
+  .pasos-reset{position:absolute;left:200px;top:3580px;width:1041px;display:flex;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.6s ease;}
+  .pasos-reset.visible{opacity:1;pointer-events:all;}
+  .reiniciar-btn{background:var(--verde);color:#fff;border:none;border-radius:30px;padding:14px 44px;font-family:'Archivo',sans-serif;font-weight:700;font-size:17px;cursor:pointer;transition:background 0.2s,transform 0.15s;letter-spacing:-0.3px;}
+  .reiniciar-btn:hover{background:#1e4d38;transform:scale(1.04);}
+
+  /* ===================== POLAROID OVERLAY ===================== */
+  .polaroid-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.80);display:flex;align-items:center;justify-content:center;z-index:3000;opacity:0;pointer-events:none;transition:opacity 0.45s ease;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
+  .polaroid-overlay.visible{opacity:1;pointer-events:all;}
+  .polaroid{background:#fff;padding:20px 20px 64px 20px;box-shadow:0 24px 80px rgba(0,0,0,0.55),0 4px 20px rgba(0,0,0,0.25);transform:rotate(-2.5deg) scale(0.55);transition:transform 0.55s cubic-bezier(0.34,1.56,0.64,1);max-width:440px;width:88%;position:relative;}
+  .polaroid-overlay.visible .polaroid{transform:rotate(-1.5deg) scale(1);}
+  .polaroid img{width:100%;display:block;aspect-ratio:1/1;object-fit:cover;}
+  .polaroid-caption{position:absolute;bottom:14px;left:0;right:0;text-align:center;font-family:'Archivo',sans-serif;font-size:16px;font-weight:500;color:#555;letter-spacing:0.5px;}
+  .polaroid-close{position:fixed;top:28px;right:28px;background:rgba(255,255,255,0.15);border:none;border-radius:50%;width:48px;height:48px;color:#fff;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;line-height:1;}
+  .polaroid-close:hover{background:rgba(255,255,255,0.28);}
+
+  .icono-32{position:absolute;left:126px;top:3424px;width:100px;height:100px;}
+
+  /* ===================== IDEAS ===================== */
+  .ideas__h{position:absolute;left:200px;top:3762px;font-family:'Archivo Black',sans-serif;font-weight:400;font-size:65px;line-height:65px;letter-spacing:-2.6px;color:#000;white-space:pre;}
+  .ideas__p{position:absolute;left:199px;top:3915px;width:450px;font-family:'Archivo',sans-serif;font-weight:400;font-size:16px;line-height:16px;letter-spacing:-0.64px;color:#000;}
+
+  /* ===================== FOOTER ===================== */
+  .footer{position:absolute;left:14px;bottom:14px;width:1412px;background:var(--verde);border-radius:var(--radio);padding:52px 60px 48px 60px;display:flex;flex-direction:column;}
+  .footer__main{display:flex;justify-content:space-between;padding-bottom:40px;}
+  .footer__col-brand{display:flex;flex-direction:column;gap:18px;max-width:320px;}
+  .footer__title{font-family:'Archivo Black',sans-serif;font-weight:400;font-size:38px;line-height:1.1;color:#fff;}
+  .footer__sub{font-family:'Archivo',sans-serif;font-weight:400;font-size:15px;color:rgba(255,255,255,0.65);line-height:1.5;}
+  .footer__btn{display:inline-flex;align-items:center;padding:13px 30px;background:var(--amarillo);border-radius:30px;font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;color:#000;text-decoration:none;width:fit-content;cursor:pointer;border:none;transition:opacity 0.2s;}
+  .footer__btn:hover{opacity:0.88;}
+  .footer__col{display:flex;flex-direction:column;gap:10px;}
+  .footer__col-title{font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:#fff;margin-bottom:6px;}
+  .footer__link{font-family:'Archivo',sans-serif;font-weight:400;font-size:15px;color:rgba(255,255,255,0.60);text-decoration:none;transition:color 0.2s;}
+  .footer__link:hover{color:#fff;}
+  .footer__divider{border:none;border-top:1px solid rgba(255,255,255,0.15);margin:0;}
+  .footer__copy{font-family:'Archivo',sans-serif;font-weight:400;font-size:13px;color:rgba(255,255,255,0.40);text-align:center;padding-top:28px;}
+</style>
+</head>
+<body>
+<div class="frame">
+
+  <!-- ===================== NAVBAR ===================== -->
+  <nav class="navbar">
+    <a href="https://www.hp.com" target="_blank" rel="noopener noreferrer"><img class="navbar__logo" src="https://www.figma.com/api/mcp/asset/9c18f21b-c234-4a8f-8b2b-a6625a8413a9" alt="HP"></a>
+    <div class="navbar__links">
+      <a class="navbar__link" href="#por-que">HP Sprocket</a>
+      <a class="navbar__link" href="#magia">Cómo funciona</a>
+      <a class="navbar__link" href="#ideas">Ideas</a>
+    </div>
+    <div class="navbar__pill">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="6" cy="6" r="4.5" stroke="#000" stroke-width="1.5"/>
+        <line x1="9.5" y1="9.5" x2="13" y2="13" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <input type="text" placeholder="Buscar…">
+    </div>
+  </nav>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <img class="hero__img" src="https://www.figma.com/api/mcp/asset/0e8cba83-18eb-4495-a7eb-5afe6120fe02" alt="">
+    <div class="hero__texto">
+      <p class="hero__h1">Tus recuerdos no
+deberían vivir en
+una nube.</p>
+      <p class="hero__sub">La impresora portátil que te devuelve la foto en papel. Sin tinta, sin cable, sin esperar.</p>
+      <a class="hero__btn" href="#ideas"><p>Descubrí más</p></a>
+    </div>
+  </section>
+
+  <!-- ===================== ¿POR QUÉ HP SPROCKET? ===================== -->
+  <section class="why" id="por-que">
+
+    <p class="why__h2">¿Por qué HP Sprocket?</p>
+    <p class="why__sub">Todo lo que necesitás para imprimir donde quieras</p>
+
+    <div class="cards">
+      <div class="card-item" style="left:0;" onclick="toggleCard(this)">
+        <img class="card-photo" src="https://www.figma.com/api/mcp/asset/706e30e3-2fa3-482f-8c79-e429f0f34d1d" alt="">
+        <p class="card-title">Portabilidad
+total</p>
+        <p class="card-body" style="width:213px;">Entra en cualquier cartera o mochila. Llevala a todos tus planes.</p>
+        <div class="card-icon"><div><img src="https://www.figma.com/api/mcp/asset/b69290cd-a2cb-4e3a-a442-1741f5a4260b" alt=""></div></div>
+      </div>
+      <div class="card-item" style="left:352px;" onclick="toggleCard(this)">
+        <img class="card-photo" src="https://www.figma.com/api/mcp/asset/a4e9e40d-67be-4c59-ad18-f78e65285df9" alt="">
+        <p class="card-title">Bluetooth
+sin wifi</p>
+        <p class="card-body" style="width:187px;">Conecta tu celular directamente a la impresora.</p>
+        <div class="card-icon"><div><img src="https://www.figma.com/api/mcp/asset/dbb622a2-b60c-4f57-9c78-eded30790789" alt=""></div></div>
+      </div>
+      <div class="card-item" style="left:704px;" onclick="toggleCard(this)">
+        <img class="card-photo" src="https://www.figma.com/api/mcp/asset/6bc3d21e-f131-4a22-98da-223b7be3eabe" alt="">
+        <p class="card-title">Tecnología
+ZINK</p>
+        <p class="card-body" style="width:187px;">Sin cartuchos de tinta. El color está integrado en el papel.</p>
+        <div class="card-icon"><div><img src="https://www.figma.com/api/mcp/asset/6f6ef4ba-4879-4d3e-8289-e255c0c28eea" alt=""></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PRICING LEFT ===================== -->
+  <div class="pricing-left">
+    <p class="pricing-left__title">El papel hace la diferencia</p>
+    <div class="pricing-left__img">
+      <div class="carousel" id="papel-carousel">
+        <div class="carousel__track" id="carousel-track">
+          <div class="carousel__slide"><img src="assets/Papel.webp" alt="Papel HP Sprocket"></div>
+          <div class="carousel__slide"><img src="assets/Papel_desplegado.png" alt="Papel desplegado"></div>
+          <div class="carousel__slide"><img src="assets/Papel_20.png" alt="Producto características"></div>
+        </div>
+        <button class="carousel__btn carousel__btn--prev" onclick="carouselGo(-1)">‹</button>
+        <button class="carousel__btn carousel__btn--next" onclick="carouselGo(1)">›</button>
+        <div class="carousel__dots">
+          <span class="carousel__dot carousel__dot--active" onclick="carouselSet(0)"></span>
+          <span class="carousel__dot" onclick="carouselSet(1)"></span>
+          <span class="carousel__dot" onclick="carouselSet(2)"></span>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== CARDS DE PAPEL ===================== -->
+  <div class="pricing">
+    <div class="pricing__card pricing__card--amarillo" id="card-adhesivo">
+      <p class="pricing__eyebrow">Papel de impresión </p>
+      <p class="pricing__title">adhesivo</p>
+      <p class="pricing__desc">Disponible en packs de 20 y 50 hojas.</p>
+    </div>
+    <div class="pricing__card-wrap" id="paper-wrap">
+      <div class="pricing__card pricing__card--crema" id="card-crema">
+        <p class="pricing__eyebrow">Papel de impresión </p>
+        <p class="pricing__title">2x3</p>
+        <p class="pricing__desc">Pack de 50 hojas incluido con la impresora.</p>
+      </div>
+    </div>
+    <div class="pricing__cta">
+      <p class="pricing__cta-title">Quiero mis papeles</p>
+      <p class="pricing__cta-sub">Disponible en nuestra tienda online y en los principales retailers del país.</p>
+    </div>
+  </div>
+
+  <!-- ===================== BANNER EXPERIENCIAS ===================== -->
+  <img class="exp-banner" src="assets/Banner_descanso.png" alt="Banner experiencias">
+  <p class="exp-text">las experiencias
+no se olvidan .</p>
+
+  <!-- ===================== LA MAGIA DEL INSTANTE ===================== -->
+  <div class="magia" id="magia">
+    <p class="magia__h">La magia del instante</p>
+    <p class="magia__sub">Así de simple. De la pantalla al papel en segundos.</p>
+  </div>
+
+  <!-- ===================== PASOS ===================== -->
+  <div class="pasos">
+
+    <!-- 01 ELEGÍS -->
+    <div class="paso paso--verde" id="paso01" onclick="activar01()">
+      <div class="paso__capa paso__capa--inicial">
+        <p class="paso__num">01</p>
+        <p class="paso__title">Elegís</p>
+        <p class="paso__body">Abrís la app y elegís la foto de tu galería o cámara.</p>
+        <span class="paso__hint">▸ Tocá para elegir</span>
+      </div>
+      <div class="paso__capa paso__capa--activa">
+        <p class="pi-num">01</p>
+        <p class="pi-label">Elegí tu foto</p>
+        <div class="foto-grid">
+          <img class="foto-thumb" src="assets/selfi-1.png" onclick="elegirFoto(event,0)" alt="">
+          <img class="foto-thumb" src="assets/selfi-2.png" onclick="elegirFoto(event,1)" alt="">
+          <img class="foto-thumb" src="assets/selfi-3.png" onclick="elegirFoto(event,2)" alt="">
+          <img class="foto-thumb" src="assets/selfi-4.png" onclick="elegirFoto(event,3)" alt="">
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 EDITAS -->
+    <div class="paso paso--lavanda bloqueado" id="paso02">
+      <div class="paso__capa paso__capa--inicial">
+        <p class="paso__num">02</p>
+        <p class="paso__title">Editas</p>
+        <p class="paso__body">Aplicás filtros y ajustes a tu foto antes de imprimir.</p>
+      </div>
+      <div class="paso__capa paso__capa--activa">
+        <p class="pi-num">02</p>
+        <p class="pi-label">Editá tu foto</p>
+        <img class="foto-preview" id="preview02" src="" alt="">
+        <div class="filtros">
+          <button class="filtro-btn sel" onclick="aplicarFiltro(event,'none')">Original</button>
+          <button class="filtro-btn" onclick="aplicarFiltro(event,'grayscale(100%)')">B&amp;N</button>
+          <button class="filtro-btn" onclick="aplicarFiltro(event,'sepia(70%)')">Vintage</button>
+          <button class="filtro-btn" onclick="aplicarFiltro(event,'saturate(200%) brightness(1.1)')">Vivo</button>
+        </div>
+        <button class="listo-btn" onclick="activar03()">Listo ✓</button>
+      </div>
+    </div>
+
+    <!-- 03 CONECTAS -->
+    <div class="paso paso--amarillo bloqueado" id="paso03">
+      <div class="paso__capa paso__capa--inicial">
+        <p class="paso__num">03</p>
+        <p class="paso__title">Conectas</p>
+        <p class="paso__body">Bluetooth on. Tu Sprocket se enciende sola, lista para imprimir.</p>
+      </div>
+      <div class="paso__capa paso__capa--activa">
+        <p class="pi-num">03</p>
+        <p class="pi-label">Conectando…</p>
+        <div class="bt-wrap">
+          <div class="bt-icono" id="btIcono">
+            <svg width="72" height="72" viewBox="0 0 24 24"><path d="M17.71 7.71L12 2h-1v7.59L6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 11 14.41V22h1l5.71-5.71-4.3-4.29 4.3-4.29zM13 5.83l1.88 1.88L13 9.59V5.83zm1.88 10.46L13 18.17v-3.76l1.88 1.88z" fill="currentColor"/></svg>
+          </div>
+          <p class="bt-status" id="btStatus">Buscando Sprocket…</p>
+          <div class="bt-bar-wrap"><div class="bt-bar" id="btBar"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 IMPRIMÍS -->
+    <div class="paso paso--verde bloqueado" id="paso04">
+      <div class="paso__capa paso__capa--inicial">
+        <p class="paso__num">04</p>
+        <p class="paso__title">Imprimís</p>
+        <p class="paso__body">En unos 68 segundos tenés tu foto en la mano.</p>
+      </div>
+      <div class="paso__capa paso__capa--activa">
+        <p class="pi-num">04</p>
+        <p class="pi-label">Imprimí tu foto</p>
+        <div class="imp-wrap">
+          <div class="imp-slot">
+            <div class="papel" id="papel">
+              <div class="scan-line" id="scanLine"></div>
+              <img id="fotoPapel" src="" alt="">
+            </div>
+          </div>
+          <button class="imprimir-btn" id="btnImprimir" onclick="imprimir()">🖨 Imprimir</button>
+          <p class="imp-estado" id="impEstado"></p>
+          <div class="polaroid-firma">
+            <span class="firma-logo">HP</span>
+            <span class="firma-sub">Sprocket</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="pasos-reset" id="pasosReset">
+    <button class="reiniciar-btn" onclick="reiniciar()">↩ Volver a intentarlo</button>
+  </div>
+
+  <img class="icono-32" src="https://www.figma.com/api/mcp/asset/7a92ff14-8b3a-4e61-9eec-b709fadd41dd" alt="">
+
+  <!-- ===================== IDEAS ===================== -->
+  <div id="ideas" class="abs" style="left:200px;top:3762px;"></div>
+  <p class="ideas__h">Ideas para usar
+tus fotos.</p>
+  <p class="ideas__p">Papel adhesivo ZINK de 2,3 × 3,4″, un 30% más grande que el de la Sprocket original. Glossy, resistente al agua, a los roces y al paso del tiempo. Despegás, pegás y tu foto queda donde quieras.</p>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="footer__main">
+      <div class="footer__col-brand">
+        <p class="footer__title">Imprimí tus momentos.</p>
+        <p class="footer__sub">¿Querés saber más sobre la HP Sprocket?</p>
+        <a class="footer__btn" href="https://www.hp.com" target="_blank" rel="noopener">Conocé más</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Redes</p>
+        <a class="footer__link" href="#">Instagram</a>
+        <a class="footer__link" href="#">TikTok</a>
+        <a class="footer__link" href="#">Facebook</a>
+        <a class="footer__link" href="#">YouTube</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Contacto</p>
+        <a class="footer__link" href="https://www.hp.com/sprocket" target="_blank" rel="noopener">www.hp.com/sprocket</a>
+        <a class="footer__link" href="#">Soporte técnico</a>
+        <a class="footer__link" href="#">Dónde comprar</a>
+      </div>
+    </div>
+    <hr class="footer__divider">
+    <p class="footer__copy">© 2026 HP Inc. Todos los derechos reservados.</p>
+  </footer>
+
+</div>
+<script>
+  /* ---- NAV SCROLL ---- */
+  const navbar = document.querySelector('.navbar');
+  window.addEventListener('scroll', function () {
+    navbar.classList.toggle('navbar--scrolled', window.scrollY > 80);
+  });
+
+  /* ---- PASOS INTERACTIVOS ---- */
+  const fotos = [
+    'assets/selfi-1.png',
+    'assets/selfi-2.png',
+    'assets/selfi-3.png',
+    'assets/selfi-4.png'
+  ];
+  let fotoElegida = null;
+  let filtroElegido = 'none';
+
+  function activar01() {
+    const el = document.getElementById('paso01');
+    el.classList.add('activado');
+    el.onclick = null;
+  }
+
+  function elegirFoto(e, idx) {
+    e.stopPropagation();
+    fotoElegida = fotos[idx];
+    document.querySelectorAll('.foto-thumb').forEach(t => t.classList.remove('elegida'));
+    e.currentTarget.classList.add('elegida');
+    const p02 = document.getElementById('paso02');
+    document.getElementById('preview02').src = fotoElegida;
+    p02.classList.remove('bloqueado');
+    setTimeout(() => p02.classList.add('activado'), 350);
+  }
+
+  function aplicarFiltro(e, filtro) {
+    filtroElegido = filtro;
+    document.getElementById('preview02').style.filter = filtro;
+    document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('sel'));
+    e.currentTarget.classList.add('sel');
+  }
+
+  function activar03() {
+    const p03 = document.getElementById('paso03');
+    p03.classList.remove('bloqueado');
+    p03.classList.add('activado');
+    setTimeout(() => { document.getElementById('btBar').style.width = '100%'; }, 300);
+    setTimeout(() => { document.getElementById('btStatus').textContent = 'Enviando foto…'; }, 900);
+    setTimeout(() => {
+      document.getElementById('btStatus').textContent = '¡Conectado! ✓';
+      const icono = document.getElementById('btIcono');
+      icono.style.animation = 'none';
+      icono.style.color = '#29654b';
+      activar04();
+    }, 2700);
+  }
+
+  function activar04() {
+    const p04 = document.getElementById('paso04');
+    document.getElementById('fotoPapel').src = fotoElegida;
+    document.getElementById('fotoPapel').style.filter = filtroElegido;
+    p04.classList.remove('bloqueado');
+    setTimeout(() => p04.classList.add('activado'), 500);
+  }
+
+  function imprimir() {
+    document.getElementById('btnImprimir').style.display = 'none';
+    document.getElementById('impEstado').textContent = 'Imprimiendo…';
+
+    const papel = document.getElementById('papel');
+    const scanLine = document.getElementById('scanLine');
+
+    setTimeout(() => {
+      scanLine.classList.add('activo');
+      papel.classList.add('saliendo');
+    }, 300);
+
+    setTimeout(() => {
+      document.getElementById('impEstado').textContent = '¡Foto lista! 📸';
+      scanLine.style.opacity = '0';
+    }, 2400);
+
+    setTimeout(() => {
+      papel.classList.add('impresa');
+      document.getElementById('paso04').classList.add('impreso');
+      document.getElementById('pasosReset').classList.add('visible');
+    }, 3200);
+  }
+
+  function reiniciar() {
+    const ids = ['paso01','paso02','paso03','paso04'];
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      el.classList.remove('activado','impreso');
+      if (id !== 'paso01') el.classList.add('bloqueado');
+    });
+    document.getElementById('paso01').onclick = activar01;
+
+    document.querySelectorAll('.foto-thumb').forEach(t => t.classList.remove('elegida'));
+    document.getElementById('preview02').src = '';
+    document.getElementById('preview02').style.filter = 'none';
+    document.querySelectorAll('.filtro-btn').forEach((b,i) => b.classList.toggle('sel', i === 0));
+
+    const btBar = document.getElementById('btBar');
+    btBar.style.transition = 'none';
+    btBar.style.width = '0%';
+    document.getElementById('btStatus').textContent = 'Buscando Sprocket…';
+    const btIcono = document.getElementById('btIcono');
+    btIcono.style.animation = '';
+    btIcono.style.color = '';
+
+    const papel = document.getElementById('papel');
+    papel.style.transition = 'none';
+    papel.classList.remove('saliendo','impresa');
+    const scanLine = document.getElementById('scanLine');
+    scanLine.classList.remove('activo');
+    scanLine.style.opacity = '';
+    document.getElementById('fotoPapel').src = '';
+    document.getElementById('fotoPapel').style.filter = 'none';
+    document.getElementById('btnImprimir').style.display = '';
+    document.getElementById('impEstado').textContent = '';
+
+    setTimeout(() => {
+      btBar.style.transition = 'width 2.2s ease';
+      papel.style.transition = 'clip-path 2s linear';
+    }, 80);
+
+    document.getElementById('pasosReset').classList.remove('visible');
+    fotoElegida = null;
+    filtroElegido = 'none';
+  }
+
+  // WHY CARDS - toggle amarillo
+  function toggleCard(el) {
+    el.classList.toggle('activa');
+  }
+
+  // CARRUSEL PAPEL
+  let carouselIdx = 0;
+  const carouselTrack = document.getElementById('carousel-track');
+  const carouselDots = document.querySelectorAll('#papel-carousel .carousel__dot');
+  function carouselSet(idx) {
+    carouselIdx = idx;
+    carouselTrack.style.transform = `translateX(-${idx * (100 / 3)}%)`;
+    carouselDots.forEach((d, i) => d.classList.toggle('carousel__dot--active', i === idx));
+  }
+  function carouselGo(dir) {
+    carouselSet((carouselIdx + dir + 3) % 3);
+  }
+
+  // STICKER - card adhesivo
+  const cardAdhesivo = document.getElementById('card-adhesivo');
+  cardAdhesivo.addEventListener('click', () => {
+    if (cardAdhesivo.classList.contains('sticker-stamping')) return;
+    cardAdhesivo.classList.add('sticker-stamping');
+    cardAdhesivo.addEventListener('animationend', () => cardAdhesivo.classList.remove('sticker-stamping'), { once: true });
+  });
+
+  // PAPEL STACK - card 2x3
+  let hojas = 0;
+  const hojasOffsets = [
+    { x: 7, y: -5, r: 3.2, color: 'var(--lavanda)' },
+    { x: -5, y: 7, r: -2.5, color: 'var(--amarillo)' },
+    { x: 11, y: 3, r: 4.5, color: 'var(--lavanda)' },
+  ];
+  const paperWrap = document.getElementById('paper-wrap');
+  const cardCrema = document.getElementById('card-crema');
+  cardCrema.addEventListener('click', () => {
+    if (hojas >= 3) {
+      paperWrap.querySelectorAll('.paper-sheet').forEach(s => s.remove());
+      hojas = 0;
+      return;
+    }
+    const o = hojasOffsets[hojas];
+    const sheet = document.createElement('div');
+    sheet.className = 'paper-sheet';
+    sheet.style.background = o.color;
+    sheet.style.opacity = '0';
+    sheet.style.transform = 'scale(0.93)';
+    paperWrap.insertBefore(sheet, cardCrema);
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      sheet.style.transition = 'opacity 0.3s ease, transform 0.42s cubic-bezier(.34,1.56,.64,1)';
+      sheet.style.opacity = '1';
+      sheet.style.transform = `translate(${o.x}px,${o.y}px) rotate(${o.r}deg)`;
+    }));
+    hojas++;
+  });
+
+  // BOUNCE - cta quiero mis papeles
+  const ctaPapeles = document.querySelector('.pricing__cta');
+  ctaPapeles.addEventListener('click', () => {
+    if (ctaPapeles.classList.contains('bouncing')) return;
+    ctaPapeles.classList.add('bouncing');
+    ctaPapeles.addEventListener('animationend', () => ctaPapeles.classList.remove('bouncing'), { once: true });
+  });
+</script>
+</body>
+</html>
